@@ -21,7 +21,10 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
       ? 'Ошибка сервера.'
       : err.message || 'Произошла ошибка.';
 
+  console.error(err);
+
   return res.status(statusCode).json({ message });
 };
 
 export default errorHandler;
+

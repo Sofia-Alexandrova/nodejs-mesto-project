@@ -2,19 +2,24 @@ import express from 'express';
 import {
   getAllUsers,
   getUserById,
-  createUser,
   updateUserProfile,
   updateUserAvatar,
+  getCurrentUser,
 } from '../controllers/users';
+
+import { authMiddleware } from '../middleware/auth';
 
 const router = express.Router();
 
 router.get('/', getAllUsers);
 router.get('/:userId', getUserById);
-router.post('/', createUser);
-router.patch('/me', updateUserProfile);
-router.patch('/me/avatar', updateUserAvatar);
+
+router.get('/me', authMiddleware, getCurrentUser);
+
+router.patch('/me', authMiddleware, updateUserProfile);
+router.patch('/me/avatar', authMiddleware, updateUserAvatar);
 
 export default router;
+
 
 

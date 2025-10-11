@@ -18,8 +18,8 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "src/**/*.ts"
-, "src/routes/users.ts"  ,
+     "src/**/*.ts",
+  "src/types/express.d.ts",
 "types" ],
   "exclude": [
     "node_modules"

@@ -19,4 +19,3 @@ export class ForbiddenError extends Error {
     Object.setPrototypeOf(this, ForbiddenError.prototype);
   }
 }
-
