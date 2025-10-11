@@ -7,12 +7,14 @@ interface JwtPayload {
   _id: string;
 }
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: Request, _res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Необходима авторизация' });
+      const err = new Error('Необходима авторизация');
+      (err as any).statusCode = 401;
+      return next(err);
     }
 
     const token = authHeader.replace('Bearer ', '');
@@ -23,6 +25,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Необходима авторизация' });
+    (err as any).statusCode = 401;
+    next(err);
   }
 };
